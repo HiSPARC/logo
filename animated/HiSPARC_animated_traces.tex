@@ -1,0 +1,162 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{a4wide}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usepackage{layout}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+
+% parameterized tikz shower graphics
+\newcommand{\airshower}[1]{
+    \begin{tikzpicture}
+        [draw/.append style={line width=1.5mm,line cap=round},
+         ground/.style={yscale=.5,rotate=-18,transform shape},
+         station/.style={draw,circle,inner sep=.2cm},
+         particle/.style={draw,circle,inner sep=.2cm},
+         hit/.style={fill=black},
+         datanet/.style={line width=1.5mm},
+         particle/.style={circle,fill=black,inner sep=0pt},
+         main/.style={particle,minimum size=3mm},
+         edge/.style={main,fill=white},
+         fragment/.style={particle,minimum size=2mm},
+         tinyfragment/.style={particle,minimum size=1mm},
+        ]
+
+        \begin{scope}[ground]
+            \coordinate (center) at (0,0) {};
+            \foreach \i in {0,1,...,4} {
+                \ifnum \i=2
+                    % Do not draw
+                \else
+                    \ifnum \i=0
+                        \node[station] (station-\i) at (\i*360/5:1cm) {};
+                    \else
+                        %\ifdim #1pt>1pt
+                            \node[station, hit] (station-\i) at (\i*360/5:1cm) {};
+                        %\else
+                        %    \node[station] (station-\i) at (\i*360/5:1cm) {};
+                        %\fi
+                    \fi
+                    \draw[datanet] (center) -- (station-\i);
+                \fi
+            }
+        \end{scope}
+
+        % Primary particle
+
+        % Hit station 4
+        \coordinate (A) at ($ (station-4) + (115:5cm) $);
+        \coordinate (A') at ($ (A)!#1!(station-4) $);
+        \node[edge] (origin) at (A) {};  % Keep frame size constant
+        %\node[main] (prim4) at (A') {};
+        \draw (station-4) -- (A);
+
+
+        % Secondary particles
+
+        % Hit nothing
+        \coordinate (T) at ($ (A)!7mm!(station-4) $);
+        \coordinate (T') at ($ (T) + (0,-10mm) $);
+        \coordinate (T'') at ($ (T)!-.54+3.85*#1!(T') $);
+        %\ifdim #1pt>.14pt
+        %    \ifdim #1pt<.4pt
+        %        \node[fragment] (secT) at (T'') {};
+        %    \fi
+        %\fi
+        \draw (T) -- (T');
+
+        % Hit station 1
+        \coordinate (B) at ($ (station-1) + (133:5cm) $);
+        \coordinate (B') at (intersection of station-1--B and station-4--A);
+        \coordinate (B'') at ($ (B')!-.44+1.42*#1!(station-1) $);
+        %\ifdim #1pt>.3pt
+        %    \node[fragment] (sec1) at (B'') {};
+        %\fi
+        \draw (station-1) -- (B');
+
+        % Hit station 3
+        \coordinate (C) at ($ (station-3) + (95:5cm) $);
+        \coordinate (C') at (intersection of station-3--C and station-4--A);
+        \coordinate (C'') at ($ (C')!-.886+1.88*#1!(station-3) $);
+        %\ifdim #1pt>.47pt
+        %    \node[fragment] (sec3) at (C'') {};
+        %\fi
+        \draw (station-3) -- (C');
+
+
+        % Tertiary particles
+        % Hit nothing
+
+        \coordinate (A1) at ($ (station-4)!.35!(A) $);
+        \coordinate (A1') at ($ (A1)!5mm!-30:(station-4) $);
+        \coordinate (A1'') at ($ (A1)!-2.5+4*#1!(A1') $);
+        %\ifdim #1pt>.65pt
+        %    \ifdim #1pt<.86pt
+        %        \node[fragment] (terA1) at (A1'') {};
+        %    \fi
+        %\fi
+        \draw (A1) -- (A1');
+
+        \coordinate (A2) at ($ (station-4)!.25!(A) $);
+        \coordinate (A2') at ($ (A2)!5mm!30:(station-4) $);
+        \coordinate (A2'') at ($ (A2)!-4.2+5.56*#1!(A2') $);
+        %\ifdim #1pt>.76pt
+        %    \ifdim #1pt<.95pt
+        %        \node[fragment] (terA2) at (A2'') {};
+        %    \fi
+        %\fi
+        \draw (A2) -- (A2');
+
+        \coordinate (B1) at ($ (station-1)!.5!(B') $);
+        \coordinate (B1') at ($ (B1)!5mm!-30:(station-1) $);
+        \coordinate (B1'') at ($ (B1)!-2.5+4*#1!(B1') $);
+        %\ifdim #1pt>.66pt
+        %    \ifdim #1pt<.86pt
+        %       \node[fragment] (terB1) at (B1'') {};
+        %    \fi
+        %\fi
+        \draw (B1) -- (B1');
+
+        \coordinate (B2) at ($ (station-1)!.35!(B') $);
+        \coordinate (B2') at ($ (B2)!5mm!30:(station-1) $);
+        \coordinate (B2'') at ($ (B2)!-4.2+5.56*#1!(B2') $);
+        %\ifdim #1pt>.77pt
+        %    \ifdim #1pt<.95pt
+        %        \node[fragment] (terB2) at (B2'') {};
+        %    \fi
+        %\fi
+        \draw (B2) -- (B2');
+
+        \coordinate (C1) at ($ (station-3)!.6!(C') $);
+        \coordinate (C1') at ($ (C1)!5mm!-30:(station-3) $);
+        \coordinate (C1'') at ($ (C1)!-6.2+9.1*#1!(C1') $);
+        %\ifdim #1pt>.69pt
+        %    \ifdim #1pt<.8pt
+        %        \node[fragment] (terC1) at (C1'') {};
+        %    \fi
+        %\fi
+        \draw (C1) -- (C1');
+
+    \end{tikzpicture}
+}
+
+
+\begin{document}
+
+\begin{center}
+
+\foreach \xb in {0}{
+    \begin{tikzpicture}
+    \node (logo) [scale=.3]{
+        \airshower{\xb}
+    };
+    \node [base right=0pt of logo] {\textsf{\Huge{HiSPARC}}};
+    \end{tikzpicture}
+}
+
+\end{center}
+
+\end{document}
