@@ -17,7 +17,7 @@ non-free software.
 
 Software: Graphic Converter, Quicktime Player 7 Pro.
 
-- Open the output pdf in Graphic Converter at 96 dpi
+- Open the output pdf in Graphic Converter at 96 dpi (192 dpi for retina)
 - Save As
     - Format: png
     - Check: Save all pages of multipage files
@@ -26,7 +26,8 @@ Software: Graphic Converter, Quicktime Player 7 Pro.
 - Open the movie in Graphic Converter
 - Choose Effect -> Channels/Frames -> Convert Movie to Animation
 - Open the GIF Animation Window
-- Check Loop and set the duration for all frames
+- Check Loop and set the duration for all frames to 0.05
+- Set duration of last frame to 0.2
 - Save this as a gif
 
 
