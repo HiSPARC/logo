@@ -31,4 +31,4 @@ Software: Graphic Converter, Quicktime Player 7 Pro.
 - Save this as a gif
 
 
-![Animated logo](https://raw.github.com/HiSPARC/logo/animated/animated/HiSPARC_animated.gif)
+![Animated logo](https://raw.githubusercontent.com/HiSPARC/logo/master/animated/HiSPARC_animated@2x.gif)
