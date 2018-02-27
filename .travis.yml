@@ -35,4 +35,4 @@ deploy:
   email: beheer@hisparc.nl
   name: HiSPARC-Bot
   on:
-    branch: travis
+    branch: master
