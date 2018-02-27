@@ -4,9 +4,12 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+# pdf2svg output
+*.svg
+
 # pdfLaTeX/Tikz/xfig output
-#*.eps
-#*.pdf
+*.pdf
+
 
 # LaTeX
 *.acn
@@ -16,6 +19,7 @@ Thumbs.db
 *.bbl
 *.blg
 *.dvi
+*.eps
 *.fdb_latexmk
 *.fls
 *.fot
