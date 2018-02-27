@@ -4,6 +4,7 @@
 \usepackage{tikz}
 \pgfrealjobname{tikzfig}
 \usetikzlibrary{calc,positioning}
+\usepackage{lmodern}
 \usepackage{layout}
 
 \begin{document}
@@ -47,12 +48,12 @@
 
   \coordinate (C1) at ($ (station-3)!.6!(C') $);
   \draw (C1) -- ($ (C1)!5mm!-30:(station-3) $);
-  
+
   \coordinate (A1) at ($ (station-4)!.35!(A) $);
   \draw (A1) -- ($ (A1)!5mm!-30:(station-4) $);
   \coordinate (A2) at ($ (station-4)!.25!(A) $);
   \draw (A2) -- ($ (A2)!5mm!30:(station-4) $);
-  
+
   \coordinate (B1) at ($ (station-1)!.5!(B') $);
   \draw (B1) -- ($ (B1)!5mm!-30:(station-1) $);
   \coordinate (B2) at ($ (station-1)!.35!(B') $);
