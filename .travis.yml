@@ -2,14 +2,13 @@ language: python
 python:
   - "3.6"
 
-sudo: false
-
 cache:
   directories:
     - /tmp/texlive
     - $HOME/.texlive
 
 install:
+  - sudo apt-get install -y pdf2svg
   - (cd travis && source ./install_texlive.sh)
 
 before_script:
@@ -18,8 +17,15 @@ before_script:
 script:
   - make all
 
-#before_deploy:
-# - yes
+before_deploy:
+  - mkdir _build
+  - cp index.html _build/
+  - cp 3d/hisparc_3d.stl _build/
+  - cp animated/*.gif _build/
+  - cp favicon/*.ico _build/
+  - cp */*.pdf _build/
+  - cp */*.svg _build/
+  - touch _build/.nojekyll
 
 deploy:
   provider: pages
