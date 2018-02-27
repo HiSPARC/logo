@@ -1,0 +1,32 @@
+language: python
+python:
+  - "3.6"
+
+sudo: false
+
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
+
+install:
+  - (cd travis && source ./install_texlive.sh)
+
+before_script:
+  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+
+#script:
+# - make all
+
+#before_deploy:
+# - yes
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: _build
+  email: beheer@hisparc.nl
+  name: HiSPARC-Bot
+  on:
+    branch: master
