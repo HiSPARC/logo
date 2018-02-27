@@ -20,7 +20,7 @@ script:
 before_deploy:
   - mkdir _build
   - cp index.html _build/
-  - cp 3d/hisparc_3d.stl _build/
+  - cp 3d/*.stl _build/
   - cp animated/*.gif _build/
   - cp favicon/*.ico _build/
   - cp */*.pdf _build/
