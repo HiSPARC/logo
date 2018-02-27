@@ -6,4 +6,4 @@ websites, or other HiSPARC related publications.
 
 In some cases the LaTeX (TikZ) source code is also provided.
 
-![HiSPARC logo](logo/HiSPARC_logo.png)
+![HiSPARC logo](animated/HiSPARC_animated.gif)
