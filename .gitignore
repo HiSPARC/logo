@@ -17,6 +17,7 @@ Thumbs.db
 *.blg
 *.dvi
 *.fdb_latexmk
+*.fls
 *.fot
 *.glg
 *.glo
