@@ -15,8 +15,8 @@ install:
 before_script:
   - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
 
-#script:
-# - make all
+script:
+  - make all
 
 #before_deploy:
 # - yes
