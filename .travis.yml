@@ -9,6 +9,7 @@ cache:
 
 install:
   - sudo apt-get install -y pdf2svg
+  - sudo apt-get install -y ghostscript
   - (cd travis && source ./install_texlive.sh)
 
 before_script:
