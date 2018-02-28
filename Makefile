@@ -1,4 +1,4 @@
-.PHONY: all pdfs svgs distclean clean
+.PHONY: all pdfs svgs gif distclean clean
 
 TEX_DIRECTORIES=$(sort $(dir $(wildcard */*.tex)))
 
@@ -11,7 +11,7 @@ SVGTARGETS=$(PDFTARGETS:.pdf=.svg)
 # which was a modified version of a Makefile by Johannes Ranke,
 # which was based on Makesfiles by Tadeusz Pietraszek
 
-all: svgs
+all: svgs gif
 pdfs: $(PDFTARGETS)
 svgs: $(SVGTARGETS)
 
@@ -25,6 +25,9 @@ svgs: $(SVGTARGETS)
 %.svg: %.pdf
 	pdf2svg $< $@
 
+gif: animated/HiSPARC_animated.pdf
+	convert -dispose background -alpha remove -density 192 -delay 5 -loop 0 -duplicate 5,-1 animated/HiSPARC_animated.pdf animated/HiSPARC_animated.gif
+
 distclean:
 	for dir in $(TEX_DIRECTORIES); do \
 		cd $$dir; \
@@ -32,6 +35,7 @@ distclean:
 		cd ..; \
 	done
 	rm -f $(SVGTARGETS)
+	rm -f animated/HiSPARC_animated.gif
 
 clean:
 	for dir in $(TEX_DIRECTORIES); do \
