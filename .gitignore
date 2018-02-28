@@ -4,6 +4,9 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+# convert output
+*.gif
+
 # pdf2svg output
 *.svg
 
