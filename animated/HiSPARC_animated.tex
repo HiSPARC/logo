@@ -16,7 +16,7 @@
         [draw/.append style={line width=1.5mm,line cap=round},
          ground/.style={yscale=0.5,rotate=-18,transform shape},
          station/.style={draw,circle,inner sep=0.2cm},
-         hit/.style={fill=black},
+         hit/.style={station,line width=0pt,inner sep=0.25cm,fill=black},
          datanet/.style={line width=1.5mm},
          particle/.style={circle,fill=black,inner sep=0pt},
          main/.style={particle,minimum size=3mm},
@@ -37,7 +37,8 @@
                         \ifdim #1pt<1pt
                             \node[station] (station-\i) at (\i*360/5:1cm) {};
                         \else
-                            \node[station, hit] (station-\i) at (\i*360/5:1cm) {};
+                            \node[station] (station-\i) at (\i*360/5:1cm) {};
+                            \node[hit] (hit-\i) at (station-\i) {};
                         \fi
                     \fi
                     \draw[datanet] (center) -- (station-\i);
