@@ -26,7 +26,7 @@ svgs: $(SVGTARGETS)
 	pdf2svg $< $@
 
 gif: animated/HiSPARC_animated.pdf
-	convert -alpha remove -density 192 -delay 2 -loop 0 -duplicate 5,-1 animated/HiSPARC_animated.pdf -layers Optimize animated/HiSPARC_animated.gif
+	convert -alpha remove -density 192 -delay 2 -loop 0 -duplicate 15,-1 animated/HiSPARC_animated.pdf -layers Optimize animated/HiSPARC_animated.gif
 
 distclean:
 	for dir in $(TEX_DIRECTORIES); do \
