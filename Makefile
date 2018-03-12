@@ -1,15 +1,10 @@
-.PHONY: all pdfs svgs gif distclean clean
+.PHONY: all pdfs svgs optimizesvg gif distclean clean
 
 TEX_DIRECTORIES=$(sort $(dir $(wildcard */*.tex)))
 
 TEXFILES=$(wildcard */*.tex)
 PDFTARGETS=$(TEXFILES:.tex=.pdf)
 SVGTARGETS=$(PDFTARGETS:.pdf=.svg)
-
-# '-recursive' rules are based on a Makefile by Santiago Gonzalez Gancedo
-# https://github.com/sangonz/latex_makefile
-# which was a modified version of a Makefile by Johannes Ranke,
-# which was based on Makesfiles by Tadeusz Pietraszek
 
 all: svgs gif
 pdfs: $(PDFTARGETS)
@@ -24,6 +19,7 @@ svgs: $(SVGTARGETS)
 
 %.svg: %.pdf
 	pdf2svg $< $@
+	svgo -i $@ --enable={sortAttrs,removeDimensions} --multipass --pretty --indent=4
 
 gif: animated/HiSPARC_animated.pdf
 	convert -alpha remove -density 192 -delay 2 -loop 0 -duplicate 15,-1 animated/HiSPARC_animated.pdf -layers Optimize animated/HiSPARC_animated.gif

@@ -8,6 +8,7 @@ cache:
     - $HOME/.texlive
 
 install:
+  - npm install -g svgo
   - sudo apt-get install -y pdf2svg
   - sudo apt-get install -y ghostscript
   - (cd travis && source ./install_texlive.sh)
