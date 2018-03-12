@@ -10,6 +10,9 @@ Thumbs.db
 # pdf2svg output
 *.svg
 
+# svgo requirements
+node_modules
+
 # pdfLaTeX/Tikz/xfig output
 *.pdf
 
