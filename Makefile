@@ -19,7 +19,7 @@ svgs: $(SVGTARGETS)
 
 %.svg: %.pdf
 	pdf2svg $< $@
-	svgo -i $@ --enable={sortAttrs,removeDimensions} --multipass --pretty --indent=4
+	svgo -i $@ --disable={removeViewBox} --enable={sortAttrs,removeDimensions} --precision=6 --multipass --pretty --indent=4
 
 gif: animated/HiSPARC_animated.pdf
 	convert -alpha remove -density 192 -delay 2 -loop 0 -duplicate 15,-1 animated/HiSPARC_animated.pdf -layers Optimize animated/HiSPARC_animated.gif
