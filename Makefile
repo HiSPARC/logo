@@ -6,11 +6,6 @@ TEXFILES=$(wildcard */*.tex)
 PDFTARGETS=$(TEXFILES:.tex=.pdf)
 SVGTARGETS=$(PDFTARGETS:.pdf=.svg)
 
-# '-recursive' rules are based on a Makefile by Santiago Gonzalez Gancedo
-# https://github.com/sangonz/latex_makefile
-# which was a modified version of a Makefile by Johannes Ranke,
-# which was based on Makesfiles by Tadeusz Pietraszek
-
 all: svgs gif
 pdfs: $(PDFTARGETS)
 svgs: $(SVGTARGETS)
