@@ -22,7 +22,7 @@ svgs: $(SVGTARGETS)
 
 %.svg: %.pdf
 	pdf2svg $< $@
-	svgo -i $@ --disable={removeViewBox} --enable={removeDimensions} --precision=6 --multipass --pretty --indent=4
+	svgo -i $@ --precision=6 --multipass --pretty --indent=4 --final-newline
 
 .PHONY: gif
 gif: animated/HiSPARC_animated.pdf
