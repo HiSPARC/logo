@@ -30,11 +30,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm --global install svgo
+      - run: |
+          npm --global install svgo
       - run: |
           sudo apt-get update
           sudo apt-get install pdf2svg
-      - run: make svgs
+      - run: |
+          make svgs
       - uses: actions/upload-artifact@v3
         with:
           name: svg
@@ -51,8 +53,10 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install imagemagick
-      - run: sed -i "/rights=\"none\" pattern=\"PDF\"/d" /etc/ImageMagick-6/policy.xml
-      - run: make gif
+      - run: |
+          sudo sed -i "/rights=\"none\" pattern=\"PDF\"/d" /etc/ImageMagick-6/policy.xml
+      - run: |
+          make gif
       - uses: actions/upload-artifact@v3
         with:
           name: gif
