@@ -54,7 +54,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install imagemagick
       - run: |
+          sudo cat /etc/ImageMagick-6/policy.xml
           sudo sed -i "/rights=\"none\"/rights=\"read | write\"/g" /etc/ImageMagick-6/policy.xml
+          sudo cat /etc/ImageMagick-6/policy.xml
+          sudo sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml
+          sudo cat /etc/ImageMagick-6/policy.xml
       - run: |
           make gif
       - uses: actions/upload-artifact@v3
