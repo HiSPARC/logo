@@ -36,6 +36,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install pdf2svg
       - run: |
+          svgo --help
           make svgs
       - uses: actions/upload-artifact@v3
         with:
