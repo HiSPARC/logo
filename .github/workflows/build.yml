@@ -62,35 +62,25 @@ jobs:
           name: gif
           path: "*/*.gif"
 
-  stl:
+  other:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/upload-artifact@v3
         with:
-          name: stl
-          path: "*/*.stl"
-
-  ico:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ico
-          path: "*/*.ico"
+          name: other
+          path: |
+            index.html
+            */*.ico
+            */*.stl
 
   publish:
-    needs: [pdf, svg, gif, stl, ico]
+    needs: [pdf, svg, gif, other]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
-      - run: ls -R .
-      - run: mv */*/*.pdf ./
-      - run: mv */*/*.svg ./
-      - run: mv */*/*.gif ./
-      - run: mv */*/*.stl ./
-      - run: mv */*/*.ico ./
+      - run: mv */index.html ./
+      - run: mv */*/*.* ./
       - uses: peaceiris/actions-gh-pages@v3.9.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
