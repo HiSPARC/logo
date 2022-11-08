@@ -51,6 +51,7 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install imagemagick
+      - run: sed -i "/rights=\"none\" pattern=\"PDF\"/d" /etc/ImageMagick-6/policy.xml
       - run: make gif
       - uses: actions/upload-artifact@v3
         with:
