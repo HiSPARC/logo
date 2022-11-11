@@ -1,0 +1,90 @@
+name: Build logos
+
+on:
+  push:
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: "*/*.tex"
+          glob_root_file: true
+          latexmk_shell_escape: true
+          work_in_root_file_dir: true
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pdf
+          path: "*/*.pdf"
+
+  svg:
+    needs: [pdf]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: pdf
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: |
+          npm --global install svgo
+      - run: |
+          sudo apt-get update
+          sudo apt-get install pdf2svg
+      - run: |
+          make svgs
+      - uses: actions/upload-artifact@v3
+        with:
+          name: svg
+          path: "*/*.svg"
+
+  gif:
+    needs: [pdf]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: pdf
+      - run: |
+          sudo apt-get update
+          sudo apt-get install imagemagick ghostscript
+      - run: |
+          sudo sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml
+      - run: |
+          make gif
+      - uses: actions/upload-artifact@v3
+        with:
+          name: gif
+          path: "*/*.gif"
+
+  other:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
+        with:
+          name: other
+          path: |
+            index.html
+            */*.ico
+            */*.stl
+
+  publish:
+    needs: [pdf, svg, gif, other]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/download-artifact@v3
+      - run: mv */index.html ./
+      - run: mv */*/*.* ./
+      - uses: peaceiris/actions-gh-pages@v3.9.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          force_orphan: true
