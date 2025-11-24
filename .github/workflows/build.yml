@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           name: pdf
       - uses: actions/setup-node@v6
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
         with:
           name: pdf
       - run: |
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v6
       - run: mv */index.html ./
       - run: mv */*/*.* ./
       - uses: peaceiris/actions-gh-pages@v4.0.0
