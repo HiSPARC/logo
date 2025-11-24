@@ -7,7 +7,7 @@ jobs:
   pdf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: xu-cheng/latex-action@v3
         with:
           root_file: "*/*.tex"
@@ -23,7 +23,7 @@ jobs:
     needs: [pdf]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
           name: pdf
@@ -46,7 +46,7 @@ jobs:
     needs: [pdf]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
           name: pdf
@@ -65,7 +65,7 @@ jobs:
   other:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/upload-artifact@v4
         with:
           name: other
